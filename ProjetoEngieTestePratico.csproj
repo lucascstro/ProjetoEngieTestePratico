@@ -94,8 +94,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ProjetoEngieTestePraticoBD.mdf" />
-    <Content Include="App_Data\ProjetoEngieTestePraticoBD_log.ldf" />
+    <Content Include="App_Data\ProjetoEngieTestePratico.mdf" />
+    <Content Include="App_Data\ProjetoEngieTestePratico_log.ldf">
+      <DependentUpon>ProjetoEngieTestePratico.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -120,6 +122,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\img\logoengie.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +134,7 @@
     </Compile>
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\Usina.cs" />
+    <Compile Include="Models\ViewModels\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,17 +158,17 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Usinas\Create.cshtml" />
-    <Content Include="Views\Usinas\Delete.cshtml" />
-    <Content Include="Views\Usinas\Details.cshtml" />
-    <Content Include="Views\Usinas\Edit.cshtml" />
-    <Content Include="Views\Usinas\Index.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Usinas\Create.cshtml" />
+    <Content Include="Views\Usinas\Delete.cshtml" />
+    <Content Include="Views\Usinas\Details.cshtml" />
+    <Content Include="Views\Usinas\Edit.cshtml" />
+    <Content Include="Views\Usinas\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

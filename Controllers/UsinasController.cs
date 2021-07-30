@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetoEngieTestePratico.Data;
 using ProjetoEngieTestePratico.Models;
+using ProjetoEngieTestePratico.Models.ViewModels;
 
 namespace ProjetoEngieTestePratico.Controllers
 {
@@ -15,11 +16,26 @@ namespace ProjetoEngieTestePratico.Controllers
     {
         private Context db = new Context();
 
-        
         // GET: Usinas
         public ActionResult Index()
-        {          
-           return View(db.Usina.ToList());
+        {
+
+            var usina = db.Usina.ToList();
+            var fornecedor = db.Fornecedor.ToList();
+
+            List<Usina> UsinaCompleta = new List<Usina>();
+
+            foreach (var item in usina)
+            {
+                foreach (var item2 in fornecedor)
+                {
+                    if (item.IdFornecedor == item2.Id)
+                    {
+                        UsinaCompleta.Add(new Usina { Id = item.Id, Ativo = item.Ativo, Uc = item.Uc, IdFornecedor = item.IdFornecedor, Fornecedor = new Fornecedor { Id = item2.Id, Nome = item2.Nome } });
+                    }
+                }
+            }
+            return View(UsinaCompleta);
         }
 
         // GET: Usinas/Details/5
@@ -30,6 +46,9 @@ namespace ProjetoEngieTestePratico.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Usina usina = db.Usina.Find(id);
+            var idusina = usina.IdFornecedor;
+            Fornecedor fornecedor = db.Fornecedor.Find(idusina);
+            usina.Fornecedor = fornecedor;
             if (usina == null)
             {
                 return HttpNotFound();
@@ -40,8 +59,10 @@ namespace ProjetoEngieTestePratico.Controllers
         // GET: Usinas/Create
         public ActionResult Create()
         {
-
-            return View();
+            Fornecedor fornecedor = new Fornecedor();
+            var fornecedores = fornecedor.PegarTodos();
+            var viewModel = new ViewModel { Fornecedor = fornecedores };
+            return View(viewModel);
         }
 
         // POST: Usinas/Create
@@ -49,7 +70,7 @@ namespace ProjetoEngieTestePratico.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Uc,Fornecedor,Ativo")] Usina usina)
+        public ActionResult Create([Bind(Include = "Id,Uc,IdFornecedor,Ativo")] Usina usina)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +102,7 @@ namespace ProjetoEngieTestePratico.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Uc,Fornecedor,Ativo")] Usina usina)
+        public ActionResult Edit([Bind(Include = "Id,Uc,IdFornecedor,Ativo")] Usina usina)
         {
             if (ModelState.IsValid)
             {

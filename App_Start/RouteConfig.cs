@@ -1,4 +1,5 @@
-﻿using ProjetoEngieTestePratico.Data;
+﻿
+using ProjetoEngieTestePratico.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace ProjetoEngieTestePratico
         {
             //verifica se tem fornecedor cadastrado no bd, for 0 cadastra
             db.VerificaFornecedor();
-
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
