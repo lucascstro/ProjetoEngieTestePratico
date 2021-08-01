@@ -8,7 +8,6 @@
         <h5 class="mt-4 mb-0">Listagem de usinas de Geração Distribuída</h5>
         <hr class="mt-0" />
     </div>
-
     <div class="row">
         <div class="col-md-4">
             <a>Fornecedor </a>
@@ -17,7 +16,7 @@
                 new SelectListItem{ Text="Sim", Value = "0" },
                 new SelectListItem{Text="Não", Value = "1" }
 
-             }, "Selecione", new { @class = "dropdownlist" })
+             }, "Selecione", new { @class = "dropdownlist " })
 
         </div>
         <div class="col-md-4">
@@ -33,8 +32,8 @@
             <a>Ativo </a>
             @Html.DropDownList("estado", new List<SelectListItem>
              {
-                new SelectListItem{ Text="Sim", Value = "0" },
-                new SelectListItem{Text="Não", Value = "1" }
+                new SelectListItem{ Text="Sim", Value = "True" },
+                new SelectListItem{Text="Não", Value = "False" }
 
              }, "Selecione", new { @class = "dropdownlist" })
         </div>
@@ -42,9 +41,6 @@
     </div>
     <div class="row mt-3 mb-3">
         <div class="col-12 mt-3" style="text-align:right">
-            @*<button class="btn btn-primary">
-                    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "botao" })
-                </button>*@
             <button class="btn btn-primary create">Cadastrar<i class="glyphicon glyphicon-file"></i></button>
             <button class="btn btn-primary">
                 @Html.ActionLink("Filtrar dados", "", null, new { @class = "botao" })
@@ -53,43 +49,81 @@
     </div>
 
     <div class="row">
-        <table class="table-bordered text-center">
-            <tr>
-                <th class="w-25">
-                    @Html.DisplayNameFor(model => model.Fornecedor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Uc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ativo)
-                </th>
-                <th style="width:25%">  @Html.DisplayName("Ações")</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        @*<table id="" class="table table-striped table-bordered">
+            <thead >
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Uc)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ativo)
-                    </td>
-                    <td>
-                        @*
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id })
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                        <button class="btn btn-success edit" data-id="@item.Id">Editar<i class="glyphicon glyphicon-file"></i></button>
-                        <button class="btn btn-success delete" data-id="@item.Id">Apagar<i class="glyphicon glyphicon-file"></i></button>
-                    </td>
+                    <th class="w-25">
+                        @Html.DisplayNameFor(model => model.Fornecedor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Uc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th style="width:25%">  @Html.DisplayName("Ações")</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Uc)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            <button class="btn btn-success edit" data-id="@item.Id">Editar<i class="glyphicon glyphicon-file"></i></button>
+                            <button class="btn btn-success delete" data-id="@item.Id">Apagar<i class="glyphicon glyphicon-file"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />*@
+        <table id="tableBody" class="display">
+            <thead>
+                <tr>
+                    <th class="w-25">
+                        @Html.DisplayNameFor(model => model.Fornecedor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Uc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ativo)
+                    </th>
+                    <th style="width:25%">  @Html.DisplayName("Ações")</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Uc)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            <button class="btn btn-success edit" data-id="@item.Id">Editar<i class="glyphicon glyphicon-file"></i></button>
+                            <button class="btn btn-success delete" data-id="@item.Id">Apagar<i class="glyphicon glyphicon-file"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 </div>

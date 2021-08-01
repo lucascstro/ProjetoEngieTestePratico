@@ -17,9 +17,8 @@ namespace ProjetoEngieTestePratico.Controllers
         private Context db = new Context();
 
         // GET: Usinas
-        public ActionResult Index()
+        public ActionResult Index()        
         {
-
             var usina = db.Usina.ToList();
             var fornecedor = db.Fornecedor.ToList();
 

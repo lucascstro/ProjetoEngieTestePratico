@@ -12,7 +12,10 @@
 .dropdownlist {
     width: 70%;
     height: 40px;
-    border-radius:2px;
+    border-radius: 2px;
+    id ='filterText';
+    style='display:inline-block';
+    onchange='filterText()';
 }
 .botao {
     text-decoration: none;
