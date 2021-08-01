@@ -31,38 +31,23 @@ namespace ProjetoEngieTestePratico.Controllers
                 {
                     if (item.IdFornecedor == item2.Id)
                     {
-                        UsinaCompleta.Add(new Usina { Id = item.Id, Ativo = item.Ativo, Uc = item.Uc, IdFornecedor = item.IdFornecedor, Fornecedor = new Fornecedor { Id = item2.Id, Nome = item2.Nome } });
+                        UsinaCompleta.Add(new Usina { Id = item.Id, Ativo = item.Ativo, Uc = item.Uc, IdFornecedor = item.IdFornecedor, Fornecedor = new Fornecedor { Id = item2.Id, Nome = item2.Nome }});
                     }
                 }
             }
             return View(UsinaCompleta);
         }
 
-        // GET: Usinas/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usina usina = db.Usina.Find(id);
-            var idusina = usina.IdFornecedor;
-            Fornecedor fornecedor = db.Fornecedor.Find(idusina);
-            usina.Fornecedor = fornecedor;
-            if (usina == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usina);
-        }
 
         // GET: Usinas/Create
         public ActionResult Create()
         {
             Fornecedor fornecedor = new Fornecedor();
             var fornecedores = fornecedor.PegarTodos();
-            var viewModel = new ViewModel { Fornecedor = fornecedores };
-            return View(viewModel);
+            Usina usinas = new Usina();
+            var viewModel = new ViewModel { Fornecedor = fornecedores, Usina = usinas };
+            viewModel.Usina.Ativo = true;
+            return PartialView(viewModel);
         }
 
         // POST: Usinas/Create
@@ -79,22 +64,33 @@ namespace ProjetoEngieTestePratico.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(usina);
+            return PartialView(usina);
         }
 
         // GET: Usinas/Edit/5
         public ActionResult Edit(int? id)
         {
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Usina usina = db.Usina.Find(id);
+            var idusina = usina.IdFornecedor;
+            Fornecedor fornecedor = db.Fornecedor.Find(idusina);
+            usina.Fornecedor = fornecedor;
+
+            Fornecedor forncedor1 = new Fornecedor();
+            var listFornecedor = forncedor1.PegarTodos().ToList();
+
+            var viewModel = new ViewModel { Usina = usina, Fornecedor = listFornecedor };
+
             if (usina == null)
             {
                 return HttpNotFound();
             }
-            return View(usina);
+            return PartialView(viewModel);
         }
 
         // POST: Usinas/Edit/5
@@ -110,7 +106,7 @@ namespace ProjetoEngieTestePratico.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usina);
+            return PartialView(usina);
         }
 
         // GET: Usinas/Delete/5
@@ -125,7 +121,7 @@ namespace ProjetoEngieTestePratico.Controllers
             {
                 return HttpNotFound();
             }
-            return View(usina);
+            return PartialView(usina);
         }
 
         // POST: Usinas/Delete/5

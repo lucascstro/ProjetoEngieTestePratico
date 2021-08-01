@@ -3,57 +3,53 @@
 @{
     ViewBag.Title = "Create";
 }
-
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Usina</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Cadastro de usinas</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Usina.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })*
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(model => model.Usina.Ativo)
+                                    @Html.ValidationMessageFor(model => model.Usina.Ativo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Fornecedor", htmlAttributes: new { @class = "control-label col-md-2" })*
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.Usina.IdFornecedor, new SelectList(Model.Fornecedor, "Id", "Nome"), "Selecione", new { htmlAttributes = new { @class = "dropdownlist" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Usina.Uc, htmlAttributes: new { @class = "control-label col-md-2" })*
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Usina.Uc, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Usina.Uc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-3">
+                        <div class="form-group">
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Create" class="btn btn-success" />
+                                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-secondary" })
+                            </div>
+                        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Usina.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Usina.Ativo)
-                @Html.ValidationMessageFor(model => model.Usina.Ativo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.Label("Fornecedor", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Usina.IdFornecedor, new SelectList(Model.Fornecedor, "Id", "Nome"),"Selecione", new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Usina.IdFornecedor, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Usina.Uc, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Usina.Uc, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Usina.Uc, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

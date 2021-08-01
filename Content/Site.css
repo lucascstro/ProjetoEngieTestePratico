@@ -12,6 +12,7 @@
 .dropdownlist {
     width: 70%;
     height: 40px;
+    border-radius:2px;
 }
 .botao {
     text-decoration: none;

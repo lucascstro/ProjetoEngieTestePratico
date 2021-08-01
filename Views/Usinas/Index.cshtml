@@ -3,43 +3,96 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="container-fluid">
+    <div>
+        <h5 class="mt-4 mb-0">Listagem de usinas de Geração Distribuída</h5>
+        <hr class="mt-0" />
+    </div>
 
-<h2>Index</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <a>Fornecedor </a>
+            @Html.DropDownList("Fornecedor", new List<SelectListItem>
+             {
+                new SelectListItem{ Text="Sim", Value = "0" },
+                new SelectListItem{Text="Não", Value = "1" }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Uc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fornecedor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </th>
-        <th></th>
-    </tr>
+             }, "Selecione", new { @class = "dropdownlist" })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Uc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ativo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        </div>
+        <div class="col-md-4">
+            <a>Uc </a>
+            @Html.DropDownList("estado", new List<SelectListItem>
+             {
+                new SelectListItem{ Text="Sim", Value = "0" },
+                new SelectListItem{Text="Não", Value = "1" }
 
-</table>
+             }, "Selecione", new { @class = "dropdownlist" })
+        </div>
+        <div class="col-md-4">
+            <a>Ativo </a>
+            @Html.DropDownList("estado", new List<SelectListItem>
+             {
+                new SelectListItem{ Text="Sim", Value = "0" },
+                new SelectListItem{Text="Não", Value = "1" }
+
+             }, "Selecione", new { @class = "dropdownlist" })
+        </div>
+
+    </div>
+    <div class="row mt-3 mb-3">
+        <div class="col-12 mt-3" style="text-align:right">
+            @*<button class="btn btn-primary">
+                    @Html.ActionLink("Cadastrar", "Create", null, new { @class = "botao" })
+                </button>*@
+            <button class="btn btn-primary create">Cadastrar<i class="glyphicon glyphicon-file"></i></button>
+            <button class="btn btn-primary">
+                @Html.ActionLink("Filtrar dados", "", null, new { @class = "botao" })
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table-bordered text-center">
+            <tr>
+                <th class="w-25">
+                    @Html.DisplayNameFor(model => model.Fornecedor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Uc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ativo)
+                </th>
+                <th style="width:25%">  @Html.DisplayName("Ações")</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Uc)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ativo)
+                    </td>
+                    <td>
+                        @*
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id })
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                        <button class="btn btn-success edit" data-id="@item.Id">Editar<i class="glyphicon glyphicon-file"></i></button>
+                        <button class="btn btn-success delete" data-id="@item.Id">Apagar<i class="glyphicon glyphicon-file"></i></button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div class="modal fade modalIndex" role="dialog" />
+

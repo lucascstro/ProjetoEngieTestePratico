@@ -6,20 +6,23 @@
     <title>@ViewBag.Title - Projeto Engie</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-light bg-light">
         <div class="container">
-            <div class="navbar-brand">               
-                <img src="~/Content/img/logoengie.png" style="width:70px; height:60px;"> 
+            <div class="navbar-brand">
+                <img src="~/Content/img/logoengie.png" style="width:70px; height:60px;">
             </div>
         </div>
     </nav>
 
     <div class="container body-content">
         @RenderBody()
-        
+
         <footer class="footer">
             <p>&copy; @DateTime.Now.Year - Projeto Engie</p>
         </footer>
@@ -27,5 +30,37 @@
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(
+            $(function () {               
+
+                $(".edit").click(function () {
+                    var id = $(this).attr("data-id");
+                    $(".modalIndex").load("Usinas/Edit/" + id, function () {
+                        $(".modal").modal("show");
+                    })
+                });
+
+                $(".delete").click(function () {
+                    var id = $(this).attr("data-id");                   
+                    $(".modalIndex").load("Usinas/Delete/" + id, function () {
+                        $(".modal").modal("show");
+                    })
+                });
+
+                $(".create").click(function () {
+                    $(".modalIndex").load("Usinas/Create", function () {
+                        $(".modal").modal("show");
+                    })
+                });
+               
+            })
+        );
+    </script>
+
 </body>
 </html>
